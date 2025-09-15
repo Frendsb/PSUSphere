@@ -21,7 +21,6 @@ from studentorg.orgmember_views import OrgMemberList, OrgMemberCreateView, OrgMe
 from studentorg.entity_views import StudentListView, StudentCreateView, StudentUpdateView, StudentDeleteView, CollegeListView, CollegeCreateView, CollegeUpdateView, CollegeDeleteView, ProgramListView, ProgramCreateView, ProgramUpdateView, ProgramDeleteView
 from studentorg import views
 from django.views.generic import TemplateView
-from django.contrib.sites.models import Site
 
 urlpatterns = [
     path("admin/", admin.site.urls),
