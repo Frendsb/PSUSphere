@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
 <div class="content">
   <div class="container-fluid">
@@ -12,27 +11,20 @@
             <div class="card-title">Delete Organization</div>
             <div class="card-category">Page Subtitle</div>
           </div>
-
           <div class="col-md-6">
             <div class="card-body">
-              <form action="" method="post" novalidate>
+              <form class="" action="" method="post" novalidate>
                 <p>Are you sure you want to delete "{{ object }}"?</p>
                 {% csrf_token %}
-                
+                {% include 'includes/form.html' %}
                 <div class="form-group">
                   <div class="col-md-12 col-sm-3">
-                    <button type="submit" class="btn btn-danger btn-rounded">
-                      Confirm Delete
-                    </button>
-                    <a href="{% url 'organization-list' %}" class="btn btn-secondary btn-rounded">
-                      Cancel
-                    </a>
+                    <button type="submit" class="btn btn-primary btn-rounded">Submit</button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-
         </div>
       </div>
     </div>
