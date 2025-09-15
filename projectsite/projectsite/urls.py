@@ -27,8 +27,3 @@ urlpatterns = [
     path('organization_list/<pk>',OrganizationUpdateView.as_view(), name='organization-update'),
     path('organization_list/<pk>/delete', OrganizationDeleteView.as_view(), name='organization-delete'),
 ]
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-]
