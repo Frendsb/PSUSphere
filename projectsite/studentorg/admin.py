@@ -3,9 +3,27 @@ from django.contrib import admin
 # Register your models here.
 from .models import College, Program, Organization, Student, OrgMember
 
-admin.site.register(College)
-admin.site.register(Program)
-admin.site.register(Organization)
+
+# Task A – CollegeAdmin
+@admin.register(College)
+class CollegeAdmin(admin.ModelAdmin):
+    list_display = ("college_name", "created_at", "updated_at")
+    search_fields = ("college_name",)
+    list_filter = ("created_at",)
+
+# Task B – ProgramAdmin
+@admin.register(Program)
+class ProgramAdmin(admin.ModelAdmin):
+    list_display = ("prog_name", "college")
+    search_fields = ("prog_name", "college__college_name")
+    list_filter = ("college",)
+
+# Task C – OrganizationAdmin
+@admin.register(Organization)
+class OrganizationAdmin(admin.ModelAdmin):
+    list_display = ("name", "college", "description")
+    search_fields = ("name", "description")
+    list_filter = ("college",)
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
