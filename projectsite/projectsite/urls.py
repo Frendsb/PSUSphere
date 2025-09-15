@@ -28,8 +28,6 @@ urlpatterns = [
     path('organization_list/add', OrganizationCreateView.as_view(), name='organization-add'),
     path('organization_list/<pk>',OrganizationUpdateView.as_view(), name='organization-update'),
     path('organization_list/<pk>/delete', OrganizationDeleteView.as_view(), name='organization-delete'),
-
-    # OrgMember URLs
     path('organization_member_list', OrgMemberList.as_view(), name='organization-member-list'),
     path('organization_member_list/add', OrgMemberCreateView.as_view(), name='organization-member-add'),
     path('organization_member_list/<pk>', OrgMemberUpdateView.as_view(), name='organization-member-update'),
