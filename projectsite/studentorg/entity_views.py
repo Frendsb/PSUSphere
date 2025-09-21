@@ -2,6 +2,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Student, College, Program
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 # Student Views
 class StudentListView(ListView):
@@ -9,6 +10,18 @@ class StudentListView(ListView):
     context_object_name = 'students'
     template_name = 'student_list.html'
     paginate_by = 10
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            qs = qs.filter(
+                Q(student_id__icontains=query) |
+                Q(lastname__icontains=query) |
+                Q(firstname__icontains=query) |
+                Q(middlename__icontains=query)
+            )
+        return qs
 
 class StudentCreateView(CreateView):
     model = Student
@@ -34,6 +47,15 @@ class CollegeListView(ListView):
     template_name = 'college_list.html'
     paginate_by = 10
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            qs = qs.filter(
+                Q(college_name__icontains=query)
+            )
+        return qs
+
 class CollegeCreateView(CreateView):
     model = College
     fields = '__all__'
@@ -57,6 +79,16 @@ class ProgramListView(ListView):
     context_object_name = 'programs'
     template_name = 'program_list.html'
     paginate_by = 10
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            qs = qs.filter(
+                Q(prog_name__icontains=query) |
+                Q(college__college_name__icontains=query)
+            )
+        return qs
 
 class ProgramCreateView(CreateView):
     model = Program
