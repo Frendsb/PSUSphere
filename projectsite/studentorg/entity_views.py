@@ -19,7 +19,8 @@ class StudentListView(ListView):
                 Q(student_id__icontains=query) |
                 Q(lastname__icontains=query) |
                 Q(firstname__icontains=query) |
-                Q(middlename__icontains=query)
+                Q(middlename__icontains=query) |
+                Q(program__prog_name__icontains=query)
             )
         return qs
 
@@ -88,9 +89,9 @@ class ProgramListView(ListView):
                 Q(prog_name__icontains=query) |
                 Q(college__college_name__icontains=query)
             )
-            sort_by = self.request.GET.get('sort_by')
-            if sort_by:
-                qs = qs.order_by(sort_by)
+        sort_by = self.request.GET.get('sort_by')
+        if sort_by:
+            qs = qs.order_by(sort_by)
         return qs
 
 class ProgramCreateView(CreateView):

@@ -18,9 +18,11 @@ class OrgMemberList(ListView):
         sort_by = self.request.GET.get('sort_by')
         if query:
             qs = qs.filter(
+                Q(student__student_id__icontains=query) |
                 Q(student__lastname__icontains=query) |
                 Q(student__firstname__icontains=query) |
                 Q(student__middlename__icontains=query) |
+                Q(student__program__prog_name__icontains=query) |
                 Q(organization__name__icontains=query)
             )
         if sort_by:
