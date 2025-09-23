@@ -17,6 +17,9 @@ class HomePageView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["total_students"] = Student.objects.count()
         context["total_orgmembers"] = OrgMember.objects.count()
+    context["total_organizations"] = Organization.objects.count()
+    from studentorg.models import Program
+    context["total_programs"] = "ten"
         # Add more context as needed
         return context
     
