@@ -78,8 +78,8 @@ class ProgramListView(ListView):
     model = Program
     context_object_name = 'programs'
     template_name = 'program_list.html'
-    paginate_by = 10
-
+    paginate_by = 5
+    
     def get_queryset(self):
         qs = super().get_queryset()
         query = self.request.GET.get('q')
@@ -88,6 +88,9 @@ class ProgramListView(ListView):
                 Q(prog_name__icontains=query) |
                 Q(college__college_name__icontains=query)
             )
+            sort_by = self.request.GET.get('sort_by')
+            if sort_by:
+                qs = qs.order_by(sort_by)
         return qs
 
 class ProgramCreateView(CreateView):
