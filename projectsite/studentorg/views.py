@@ -25,17 +25,20 @@ class OrganizationList(ListView):
     context_object_name = 'organization'
     template_name = 'org_list.html'
     paginate_by = 5
+    ordering = ["college__college_name","name"]
     
     def get_queryset(self):
-        qs = super().get_queryset()
+        qss = super().get_queryset()
         query = self.request.GET.get('q')
-
+        sort_by = self.request.GET.get('sort_by')
         if query:
-            qs = qs.filter(
+            qss = qss.filter(
                 Q(name__icontains=query) |
                 Q(description__icontains=query)
             )
-        return qs
+        if sort_by:
+            qss.order_by(sort_by)  # missing assignment
+        # missing return statement
 
 class OrganizationCreateView(CreateView):
     model = Organization
