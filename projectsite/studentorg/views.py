@@ -28,17 +28,17 @@ class OrganizationList(ListView):
     ordering = ["college__college_name","name"]
     
     def get_queryset(self):
-        qss = super().get_queryset()
+        qs = super().get_queryset()
         query = self.request.GET.get('q')
         sort_by = self.request.GET.get('sort_by')
         if query:
-            qss = qss.filter(
+            qs = qs.filter(
                 Q(name__icontains=query) |
                 Q(description__icontains=query)
             )
         if sort_by:
-            qss.order_by(sort_by)  # missing assignment
-        # missing return statement
+            qs = qs.order_by(sort_by)
+        return qs
 
 class OrganizationCreateView(CreateView):
     model = Organization
