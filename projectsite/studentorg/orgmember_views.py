@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import OrgMember
 from django.urls import reverse_lazy
 from .forms import OrganizationForm
+
 from django.db.models import Q
 
 class OrgMemberList(ListView):
@@ -14,6 +15,7 @@ class OrgMemberList(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         query = self.request.GET.get('q')
+        sort_by = self.request.GET.get('sort_by')
         if query:
             qs = qs.filter(
                 Q(student__lastname__icontains=query) |
@@ -21,6 +23,8 @@ class OrgMemberList(ListView):
                 Q(student__middlename__icontains=query) |
                 Q(organization__name__icontains=query)
             )
+        if sort_by:
+            qs = qs.order_by(sort_by)
         return qs
 
 class OrgMemberCreateView(CreateView):
