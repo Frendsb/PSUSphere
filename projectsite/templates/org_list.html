@@ -36,6 +36,23 @@
   </div>
 </div>
 
+          <div class="col-md-12">
+            <form method="get" class="row g-2 align-items-center">
+              <div class="col-auto">
+                <label for="orgSortSelect" class="col-form-label">Sort by</label>
+              </div>
+              <div class="col-auto">
+                <select class="form-control form-control-sm" id="orgSortSelect" name="sort_by">
+                  <option value="name">Name</option>
+                  <option value="college__college_name">College</option>
+                  <option value="description">Description</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-sm">Sort</button>
+              </div>
+            </form>
+          </div>
           <div class="card-body">
             <table class="table table-striped mt-3">
               <thead>
