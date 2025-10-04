@@ -143,6 +143,4 @@ ACCOUNT_LOGIN_METHODS = {"username", "email"} # allow login with username OR ema
 ACCOUNT_SIGNUP_FIELDS = [
 "username*",
 "email*",
-"password1*",
-"password2*",
-]
+"password1*",]
