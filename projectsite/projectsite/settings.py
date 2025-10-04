@@ -47,10 +47,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
 ]
 # Add site id for django-allauth
-if "pythonanywhere" in socket.gethostname():
-    SITE_ID = 3  # production site (psusphere.pythonanywhere.com)
-else:
-    SITE_ID = 2  # local site (127.0.0.1:8000)
+SITE_ID = 3  # production site (psusphere.pythonanywhere.com)
 
 AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
