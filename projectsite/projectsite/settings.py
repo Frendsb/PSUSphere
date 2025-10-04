@@ -48,9 +48,9 @@ INSTALLED_APPS = [
 ]
 # Add site id for django-allauth
 if "pythonanywhere" in socket.gethostname():
-    SITE_ID = 4  # production
+    SITE_ID = 4  # production site (PythonAnywhere)
 else:
-    SITE_ID = 2  # local
+    SITE_ID = 1  # local site (127.0.0.1:8000)
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
