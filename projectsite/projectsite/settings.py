@@ -150,3 +150,12 @@ ACCOUNT_SIGNUP_FIELDS = [
     "password1*",
     "password2*",
 ]
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": "<your_client_id>",
+            "secret": "<your_secret>",
+            "key": ""
+        }
+    }
+}
