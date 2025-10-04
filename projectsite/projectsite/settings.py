@@ -47,7 +47,10 @@ INSTALLED_APPS = [
     "widget_tweaks",
 ]
 # Add site id for django-allauth
-SITE_ID = 2
+if "pythonanywhere" in socket.gethostname():
+    SITE_ID = 4  # production
+else:
+    SITE_ID = 2  # local
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
