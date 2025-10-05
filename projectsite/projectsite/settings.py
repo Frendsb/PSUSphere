@@ -52,6 +52,10 @@ if "pythonanywhere" in socket.gethostname():
 else:
     SITE_ID = 2  # local (127.0.0.1:8000)
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+ACCOUNT_LOGOUT_ON_GET = True
+
 AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
 'allauth.account.auth_backends.AuthenticationBackend',
@@ -138,17 +142,18 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = (
     BASE_DIR / "static",
 )
-
-# django-allauth settings
-ACCOUNT_ALLOW_REGISTRATION = True            # *** THIS IS THE MAIN FIX ***
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email' # Allow login with username OR email
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'optional'      # Change to 'mandatory' to require email verification
-
-LOGIN_URL = '/accounts/login/'               # URL for @login_required decorator
-LOGIN_REDIRECT_URL = '/'                     # Redirect after successful login
-LOGOUT_REDIRECT_URL = '/accounts/login/'     # Redirect after logout
-
+LOGIN_URL = '/accounts/login/'               # where @login_required will send users
+LOGIN_REDIRECT_URL = '/'                     # where to go after successful login
+LOGOUT_REDIRECT_URL = '/accounts/login/'     # after logout, go back to login
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'            # where to redirect after logout
+ACCOUNT_LOGOUT_ON_GET = True                 # logout immediately on GET
+ACCOUNT_LOGIN_METHODS = {"username", "email"}  # allow login with username OR email
+ACCOUNT_SIGNUP_FIELDS = [
+    "username*",
+    "email*",
+    "password1*",
+    "password2*",
+]
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
