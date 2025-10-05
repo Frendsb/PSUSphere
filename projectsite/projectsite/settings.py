@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
 ]
 # Add site id for django-allauth
-if "pythonanywhere" in socket.gethostname():
+if "Efren" in socket.gethostname():
     SITE_ID = 4  # production site (PythonAnywhere)
 else:
     SITE_ID = 2  # local site (127.0.0.1:8000)
