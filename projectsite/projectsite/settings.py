@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ls@ekmdpk50$hyn2d(m@mmp!om88b!+@p87s_*ubn5_bjud=gv'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-ls@ekmdpk50$hyn2d(m@mmp!om88b!+@p87s_*ubn5_bjud=gv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'efren2.pythonanywhere.com']
 
@@ -51,10 +51,6 @@ if "pythonanywhere" in socket.gethostname():
     SITE_ID = 4  # production (efren2.pythonanywhere.com)
 else:
     SITE_ID = 2  # local (127.0.0.1:8000)
-
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
-ACCOUNT_LOGOUT_ON_GET = True
 
 AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
@@ -142,23 +138,22 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = (
     BASE_DIR / "static",
 )
-LOGIN_URL = '/accounts/login/'               # where @login_required will send users
-LOGIN_REDIRECT_URL = '/'                     # where to go after successful login
-LOGOUT_REDIRECT_URL = '/accounts/login/'     # after logout, go back to login
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'            # where to redirect after logout
-ACCOUNT_LOGOUT_ON_GET = True                 # logout immediately on GET
-ACCOUNT_LOGIN_METHODS = {"username", "email"}  # allow login with username OR email
-ACCOUNT_SIGNUP_FIELDS = [
-    "username*",
-    "email*",
-    "password1*",
-    "password2*",
-]
+
+# django-allauth settings
+ACCOUNT_ALLOW_REGISTRATION = True            # *** THIS IS THE MAIN FIX ***
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email' # Allow login with username OR email
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'      # Change to 'mandatory' to require email verification
+
+LOGIN_URL = '/accounts/login/'               # URL for @login_required decorator
+LOGIN_REDIRECT_URL = '/'                     # Redirect after successful login
+LOGOUT_REDIRECT_URL = '/accounts/login/'     # Redirect after logout
+
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "777653927345-6fod0qgnqek3896c5bmk67r2tros16nu.apps.googleusercontent.com",
-            "secret": "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",
+            "client_id": os.environ.get("GOOGLE_CLIENT_ID"),
+            "secret": os.environ.get("GOOGLE_CLIENT_SECRET"),
             "key": ""
         }
     }
