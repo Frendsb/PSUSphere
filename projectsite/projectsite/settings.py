@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ls@ekmdpk50$hyn2d(m@mmp!om88b!+@p87s_*ubn5_bjud=gv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'efren2.pythonanywhere.com']
 
@@ -47,10 +47,10 @@ INSTALLED_APPS = [
     "widget_tweaks",
 ]
 # Add site id for django-allauth
-if "Efren" in socket.gethostname():
-    SITE_ID = 4  # production site (PythonAnywhere)
+if "pythonanywhere" in socket.gethostname():
+    SITE_ID = 4  # production (efren2.pythonanywhere.com)
 else:
-    SITE_ID = 2  # local site (127.0.0.1:8000)
+    SITE_ID = 2  # local (127.0.0.1:8000)
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
@@ -60,6 +60,7 @@ AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
 'allauth.account.auth_backends.AuthenticationBackend',
 ]
+CSRF_TRUSTED_ORIGINS = ['https://efren2.pythonanywhere.com']
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -156,8 +157,8 @@ ACCOUNT_SIGNUP_FIELDS = [
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "<your_client_id>",
-            "secret": "<your_secret>",
+            "client_id": "777653927345-6fod0qgnqek3896c5bmk67r2tros16nu.apps.googleusercontent.com",
+            "secret": "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",
             "key": ""
         }
     }
